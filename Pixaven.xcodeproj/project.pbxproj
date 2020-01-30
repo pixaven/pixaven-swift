@@ -104,16 +104,24 @@
 		087B85B0237AB5D300D9B1EE /* Pixaven */ = {
 			isa = PBXGroup;
 			children = (
+				08CD757723E2FFF00022232D /* Classes */,
+				087B85B2237AB5D300D9B1EE /* Info.plist */,
+				087B85B1237AB5D300D9B1EE /* Pixaven.h */,
+			);
+			path = Pixaven;
+			sourceTree = "<group>";
+		};
+		08CD757723E2FFF00022232D /* Classes */ = {
+			isa = PBXGroup;
+			children = (
 				084CA3972382DD0100EF2858 /* BaseRequest.swift */,
 				1C63AA5023AC08C60042DBF0 /* BoundaryGenerator.swift */,
 				084CA3992382DD1000EF2858 /* FetchRequest.swift */,
-				087B85B2237AB5D300D9B1EE /* Info.plist */,
-				087B85B1237AB5D300D9B1EE /* Pixaven.h */,
 				087B85B9237AB8A900D9B1EE /* PixavenClient.swift */,
 				08D4A2B8238400F500ED1171 /* PixavenError.swift */,
 				084CA39B2382DD2400EF2858 /* UploadRequest.swift */,
 			);
-			path = Pixaven;
+			path = Classes;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -444,6 +452,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Pixaven/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",
@@ -470,6 +479,7 @@
 				DYLIB_INSTALL_NAME_BASE = "@rpath";
 				INFOPLIST_FILE = Pixaven/Info.plist;
 				INSTALL_PATH = "$(LOCAL_LIBRARY_DIR)/Frameworks";
+				IPHONEOS_DEPLOYMENT_TARGET = 10.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
 					"@executable_path/Frameworks",

@@ -6,7 +6,7 @@
 //  Copyright © 2019 Pixaven. All rights reserved.
 //
 
-import UIKit
+import Foundation
 
 class FetchRequest: BaseRequest {
     var key: String
