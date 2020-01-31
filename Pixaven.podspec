@@ -1,10 +1,10 @@
 Pod::Spec.new do |spec|
   spec.name          = "Pixaven"
-  spec.version       = "1.0.1"
+  spec.version       = "1.0.2"
   spec.summary       = "The official Swift integration for the Pixaven Image API"
   spec.description   = "Pixaven is an enterprise-grade image processing SaaS. Resize, scale, crop, mask, filter and enhance your images with blazing speed."
-  spec.homepage      = "https://www.pixaven.com"
-  spec.license       = "MIT"
+  spec.homepage      = "https://github.com/pixaven/pixaven-swift"
+  spec.license       = { :type => 'MIT', :file => 'LICENSE' }
   spec.author        = { "Pixaven" => "support@pixaven.com" }
   spec.source        = { :git => "https://github.com/pixaven/pixaven-swift.git", :tag => "#{spec.version}" }
   spec.source_files   = 'Pixaven/Classes/**/*'
