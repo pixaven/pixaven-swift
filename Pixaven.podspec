@@ -9,7 +9,6 @@ Pod::Spec.new do |spec|
   spec.source        = { :git => "https://github.com/pixaven/pixaven-swift.git", :tag => "#{spec.version}" }
   spec.source_files   = 'Pixaven/Classes/**/*'
   spec.ios.deployment_target = "13.0"
-  spec.osx.deployment_target  = "10.14"
   spec.frameworks     = 'UIKit', 'Foundation', 'MobileCoreServices'
   spec.swift_version  = '5.0'
 end
