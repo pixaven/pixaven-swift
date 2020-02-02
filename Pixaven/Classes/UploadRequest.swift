@@ -3,11 +3,10 @@
 //  Pixaven
 //
 //  Created by Dawid Płatek on 18/11/2019.
-//  Copyright © 2019 Pixaven. All rights reserved.
+//  Copyright © 2020 Pixaven. All rights reserved.
 //
 
 import Foundation
-import MobileCoreServices
 
 class UploadRequest: BaseRequest {
     var key: String
@@ -15,38 +14,38 @@ class UploadRequest: BaseRequest {
     var parameters: [String : Any] = [:]
     var isBinary: Bool = false
     let fileUrl: URL
-    
+
     private let boundary: String
-    
+
     private let fileManager = FileManager.default
-    
+
     var contentType: String {
         return "multipart/form-data; boundary=\(boundary)"
     }
-    
+
     init(key: String, fileUrl: URL) {
         self.type = RequestType.upload
         self.key = key
         self.fileUrl = fileUrl
         self.boundary = BoundaryGenerator.randomBoundary()
     }
-    
+
     func data() throws -> Data {
         var data = Data()
-        
+
         if isBinary {
             parameters["response"] = ["mode": "binary"]
         }
-        
+
         if let jsonData = try? JSONSerialization.data(withJSONObject: parameters, options: []) {
             data.append(initialBoundaryData())
             data.append(Data("Content-Disposition: form-data; name=\"data\"\(EncodingCharacters.crlf)\(EncodingCharacters.crlf)".utf8))
             data.append(jsonData)
             data.append(Data(EncodingCharacters.crlf.utf8))
         }
-        
+
         let filename = fileUrl.lastPathComponent
-        
+
         let bodyContentLength: UInt64
 
         do {
@@ -62,12 +61,12 @@ class UploadRequest: BaseRequest {
         guard let stream = InputStream(url: fileUrl) else {
             throw PixavenError.cannotCreateStreamFromFile
         }
-        
+
         stream.open()
         defer { stream.close() }
 
         var encodedFileData = Data()
-        
+
         let streamBufferSize = 1024
 
         while stream.hasBytesAvailable {
@@ -84,22 +83,22 @@ class UploadRequest: BaseRequest {
                 break
             }
         }
-        
+
         let mimeType = mimeTypeForPath(fileUrl.path)
-        
+
         data.append(encapsulatedBoundaryData())
         data.append(Data("Content-Disposition: form-data; name=\"file\"; filename=\"\(filename)\"\(EncodingCharacters.crlf)".utf8))
         data.append(Data("Content-Type: \(mimeType)\(EncodingCharacters.crlf)\(EncodingCharacters.crlf)".utf8))
         data.append(encodedFileData)
         data.append(finalBoundaryData())
-        
+
         return data
     }
-    
+
     private func mimeTypeForPath(_ path: String) -> String {
         let url = NSURL(fileURLWithPath: path)
         let pathExtension = url.pathExtension
-        
+
         if let uti = UTTypeCreatePreferredIdentifierForTag(kUTTagClassFilenameExtension, pathExtension! as NSString, nil)?.takeRetainedValue() {
             if let mimetype = UTTypeCopyPreferredTagWithClass(uti, kUTTagClassMIMEType)?.takeRetainedValue() {
                 return mimetype as String
@@ -107,7 +106,7 @@ class UploadRequest: BaseRequest {
         }
         return "application/octet-stream";
     }
-    
+
     private func initialBoundaryData() -> Data {
         return BoundaryGenerator.boundaryData(forBoundaryType: .initial, boundary: boundary)
     }

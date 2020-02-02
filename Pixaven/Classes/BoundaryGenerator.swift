@@ -3,7 +3,7 @@
 //  Pixaven
 //
 //  Created by Dawid Płatek on 19/12/2019.
-//  Copyright © 2019 Pixaven. All rights reserved.
+//  Copyright © 2020 Pixaven. All rights reserved.
 //
 
 import Foundation
