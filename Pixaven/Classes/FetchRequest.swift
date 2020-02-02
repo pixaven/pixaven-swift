@@ -32,6 +32,6 @@ class FetchRequest: BaseRequest {
             parameters["response"] = ["mode": "binary"]
         }
         
-        return try JSONSerialization.data(withJSONObject: parameters, options: [.withoutEscapingSlashes])
+        return try JSONSerialization.data(withJSONObject: parameters, options: [])
     }
 }
